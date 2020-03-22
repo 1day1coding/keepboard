@@ -34,10 +34,8 @@ describe('HelloWorld.vue', () => {
     // NOTE - created 이후 화면 갱신 사이클 대기
     await Vue.nextTick();
     await flushPromises();
-    expect(JSON.parse((wrapper.get('label')
-      .text())))
-      .to
-      .deep
-      .equal(expected);
+    expect(wrapper.get('#comment-0').text()).to.equal('a');
+    expect(wrapper.get('#comment-1').text()).to.equal('b');
+    expect(wrapper.get('#comment-2').text()).to.equal('c');
   });
 });
