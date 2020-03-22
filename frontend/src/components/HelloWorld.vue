@@ -1,8 +1,45 @@
 <template>
-  <div class="hello">
-    <label>
-      {{this.comments}}
-    </label>
+  <div class="container">
+    <br><br><br>
+    <div>
+      <table class="table">
+        <thead class="thead-dark">
+        <th class="table-sharp">
+          #
+        </th>
+        <th class="table-blank">
+        </th>
+        <th class="table-body">
+          comment
+        </th>
+        </thead>
+        <tbody>
+        <tr v-for="(comment, idx) in comments" v-bind:key="comment">
+          <td class="table-sharp">
+            {{idx + 1}}
+          </td>
+          <th class="table-blank">
+            <i class="far fa-hand-point-right"></i>
+          </th>
+          <td class="table-body">
+            <label :name='"comment-"+idx' :id='"comment-"+idx'>
+              {{comment}}
+            </label>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="beginner col-11">
+        <label class="col-12">
+          <input id="new-comment" class="swal2-input"/>
+        </label>
+      </div>
+      <div class="follow col-1">
+        <button id="enter" type="submit" class="swal2-actions btn btn-dark">Enter</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,21 +64,25 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-  h3 {
-    margin: 40px 0 0;
+  .table-sharp {
+    width: 100px;
   }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
+  .table-blank {
+    width: 40px;
+    text-align: right;
   }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
+  .table-body {
+    width: 600px;
+    text-align: left;
   }
-
-  a {
-    color: #42b983;
+  .table-last {
+    width: 10px;
+  }
+  .beginner {
+    float: left;
+  }
+  .follow {
+    float: left;
+    display:inline-block;
   }
 </style>
