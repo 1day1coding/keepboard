@@ -1,16 +1,36 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">
-        Home
-      </router-link> |
-      <router-link to="/about">
-        About
-      </router-link>
-    </div>
+    <sidebar-menu :menu="menu" :collapsed="true"/>
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      menu: [
+        {
+          header: true,
+          title: 'Menu',
+        },
+        {
+          href: '/',
+          title: 'Home',
+          icon: 'fa fa-home',
+          child: [
+            {
+              href: '/board',
+              title: 'Board',
+              icon: 'fa fa-list',
+            },
+          ],
+        },
+      ],
+    };
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
