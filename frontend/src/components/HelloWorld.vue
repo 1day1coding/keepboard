@@ -33,11 +33,16 @@
     <div>
       <div class="beginner col-11">
         <label class="col-12">
-          <input id="new-comment" class="swal2-input"/>
+          <input v-model="comment" id="new-comment" class="swal2-input"/>
         </label>
       </div>
       <div class="follow col-1">
-        <button id="enter" type="submit" class="swal2-actions btn btn-dark">Enter</button>
+        <button id="enter"
+                type="submit"
+                class="swal2-actions btn btn-dark"
+                v-on:click="saveComment"
+        >Enter
+        </button>
       </div>
     </div>
   </div>
@@ -49,12 +54,25 @@ import Swal from 'sweetalert2';
 export default {
   name: 'HelloWorld',
   data() {
-    return { comments: [] };
+    return {
+      comments: [],
+      comment: '',
+    };
+  },
+  methods: {
+    async saveComment() {
+      try {
+        await this.$store.commit('addComment', { comment: this.comment });
+      } catch (e) {
+        await Swal.fire(`${e}`);
+      }
+    },
   },
   async created() {
     try {
       const { data } = await this.$store.dispatch('getComments');
       this.comments = data;
+      this.$set(this.$data, 'comment', '');
     } catch (e) {
       await Swal.fire(`${e}`);
     }
@@ -67,22 +85,27 @@ export default {
   .table-sharp {
     width: 100px;
   }
+
   .table-blank {
     width: 40px;
     text-align: right;
   }
+
   .table-body {
     width: 600px;
     text-align: left;
   }
+
   .table-last {
     width: 10px;
   }
+
   .beginner {
     float: left;
   }
+
   .follow {
     float: left;
-    display:inline-block;
+    display: inline-block;
   }
 </style>
