@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -45,12 +46,16 @@ func (s *Server) Run() error {
 func (s *Server) setRoute() {
 	h := api.New(func() ([]string, error) {
 		return []string{"hello world", "this is sparta", "test"}, nil
+	}, func(msg string) error {
+		log.Println("input", msg)
+		return nil
 	})
 
 	s.GET("/", h.HealthCheck)
 
 	apiGroup := s.Group("/api")
 	{
-		apiGroup.GET("/comments/", h.GetComments)
+		apiGroup.GET("/comment/", h.GetComment)
+		apiGroup.POST("/comment/", h.AddComment)
 	}
 }
