@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import API from '@/api';
 
 const getters = {
@@ -7,19 +6,19 @@ const getters = {
 
 const actions = {
   getComments: async () => API.getComments(),
-  // setComments: async({ commit }, payload) => {
-  //   await API.setComments(payload);
-  //   commit('setComments', {});
-  // },
 };
 
 const mutations = {
-  setComments(state, { comments }) {
-    _.assign(state.comments, comments);
+  addComment: async (_, payload) => {
+    await API.addComment(payload);
+    console.log(payload);
   },
 };
 
-const state = { comments: [] };
+const state = {
+  comments: [],
+  comment: '',
+};
 
 export default {
   actions,
