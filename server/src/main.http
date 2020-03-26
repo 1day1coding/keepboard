@@ -1,0 +1,13 @@
+###
+
+GET /
+host: localhost:8888
+
+> {%
+client.test("Request executed successfully", function () {
+    client.assert(response.status === 200, "Response status is not 200");
+    client.assert(response.body === "Hello World!", "response message did not equal");
+});
+ %}
+
+###
