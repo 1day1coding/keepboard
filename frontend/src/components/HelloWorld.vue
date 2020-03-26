@@ -63,6 +63,7 @@ export default {
     async saveComment() {
       try {
         await this.$store.commit('addComment', { comment: this.comment });
+        this.comment = '';
       } catch (e) {
         await Swal.fire(`${e}`);
       }
