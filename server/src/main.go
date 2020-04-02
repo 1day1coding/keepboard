@@ -11,5 +11,12 @@ func main() {
 		return c.String(http.StatusOK, "Hello World!")
 	})
 
+	e.GET("/comment/:str", addComment)
+
 	e.Logger.Fatal(e.Start(":8888")) // localhost:1323
+}
+
+func addComment(c echo.Context) error {
+	str := c.Param("str")
+	return c.String(http.StatusOK, str)
 }
